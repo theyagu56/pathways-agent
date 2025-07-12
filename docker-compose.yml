@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: patient_backend
+    ports:
+      - '8090:8090'
+    volumes:
+      - ./data:/app/data
+    restart: always  
+
+  frontend:
+    image: python:3.10-slim
+    container_name: patient_frontend
+    working_dir: /app
+    volumes:
+      - ./frontend/build/web:/app
+    command: python -m http.server 5174
+    depends_on:
+      - backend
+    ports:
+      - '5174:5174'
+    restart: always  
