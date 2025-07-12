@@ -1,0 +1,22 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Environment files
+.env
+*.env
+
+# IDE directories
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Flutter build outputs (if any included)
+frontend/build/
+frontend/.dart_tool/
+
+# OS artifacts
+.DS_Store
