@@ -45,8 +45,29 @@ class ProviderMatchResponse(BaseModel):
 def load_providers() -> List[dict]:
     """Load providers from the shared JSON file"""
     try:
-        # Use absolute path
-        providers_path = "/Users/thiyagarajankamalakannan/Projects/CursorPathwayAgent/pathways-ai/shared-data/providers.json"
+        # Try multiple possible paths for different environments
+        possible_paths = [
+            # Relative path from backend directory
+            "../shared-data/providers.json",
+            # Absolute path for local development
+            "/Users/thiyagarajankamalakannan/Projects/CursorPathwayAgent/pathways-ai/shared-data/providers.json",
+            # Codespace/container path
+            "./shared-data/providers.json",
+            # Alternative relative path
+            "../../shared-data/providers.json"
+        ]
+        
+        providers_path = None
+        for path in possible_paths:
+            if os.path.exists(path):
+                providers_path = path
+                break
+        
+        if not providers_path:
+            error_msg = f"❌ Provider data file not found. Tried paths: {possible_paths}"
+            print(error_msg)
+            print("💡 Make sure the shared-data/providers.json file exists")
+            raise HTTPException(status_code=500, detail=error_msg)
         
         print(f"📁 Loading providers from: {providers_path}")
         
@@ -261,7 +282,7 @@ if __name__ == "__main__":
     print("🚀 Starting Pathways Agent Provider Matching API...")
     print("📋 Configuration:")
     print(f"   - OpenAI API Key: {'✅ Set' if os.getenv('OPENAI_API_KEY') else '❌ Missing'}")
-    print(f"   - Providers file: /Users/thiyagarajankamalakannan/Projects/CursorPathwayAgent/pathways-ai/shared-data/providers.json")
+    print(f"   - Providers file: Will auto-detect from multiple possible locations")
     print("🌐 Server will be available at: http://localhost:8000")
     print("📚 API Documentation: http://localhost:8000/docs")
     print("=" * 50)
