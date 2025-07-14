@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "1",
+    "name": "Dr. Sarah Johnson",
+    "specialty": "Orthopedics",
+    "zip_code": "10001",
+    "insurances": ["Blue Cross", "Aetna", "Cigna"],
+    "rating": 4.8,
+    "distance": 2.5,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "2",
+    "name": "Dr. Michael Chen",
+    "specialty": "Sports Medicine",
+    "zip_code": "10002",
+    "insurances": ["Blue Cross", "UnitedHealth"],
+    "rating": 4.9,
+    "distance": 3.1,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "3",
+    "name": "Dr. Emily Rodriguez",
+    "specialty": "Physical Therapy",
+    "zip_code": "10003",
+    "insurances": ["Aetna", "Cigna", "Medicare"],
+    "rating": 4.7,
+    "distance": 1.8,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "4",
+    "name": "Dr. James Wilson",
+    "specialty": "Neurology",
+    "zip_code": "10004",
+    "insurances": ["Blue Cross", "Aetna"],
+    "rating": 4.6,
+    "distance": 4.2,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "5",
+    "name": "Dr. Lisa Thompson",
+    "specialty": "Cardiology",
+    "zip_code": "10005",
+    "insurances": ["Cigna", "UnitedHealth"],
+    "rating": 4.9,
+    "distance": 5.0,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "6",
+    "name": "Dr. Robert Davis",
+    "specialty": "Orthopedics",
+    "zip_code": "10006",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.5,
+    "distance": 2.1,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "7",
+    "name": "Dr. Jennifer Lee",
+    "specialty": "Sports Medicine",
+    "zip_code": "10007",
+    "insurances": ["Aetna", "Cigna"],
+    "rating": 4.8,
+    "distance": 3.7,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "8",
+    "name": "Dr. David Brown",
+    "specialty": "Physical Therapy",
+    "zip_code": "10008",
+    "insurances": ["Blue Cross", "UnitedHealth"],
+    "rating": 4.4,
+    "distance": 1.5,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "9",
+    "name": "Dr. Amanda Garcia",
+    "specialty": "Neurology",
+    "zip_code": "10009",
+    "insurances": ["Cigna", "Medicare"],
+    "rating": 4.7,
+    "distance": 4.8,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "10",
+    "name": "Dr. Christopher Martinez",
+    "specialty": "Cardiology",
+    "zip_code": "10010",
+    "insurances": ["Blue Cross", "Aetna"],
+    "rating": 4.6,
+    "distance": 5.2,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "11",
+    "name": "Dr. Rachel Green",
+    "specialty": "Orthopedics",
+    "zip_code": "10011",
+    "insurances": ["UnitedHealth", "Medicare"],
+    "rating": 4.8,
+    "distance": 2.8,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "12",
+    "name": "Dr. Thomas Anderson",
+    "specialty": "Sports Medicine",
+    "zip_code": "10012",
+    "insurances": ["Blue Cross", "Cigna"],
+    "rating": 4.9,
+    "distance": 3.3,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "13",
+    "name": "Dr. Nicole White",
+    "specialty": "Physical Therapy",
+    "zip_code": "10013",
+    "insurances": ["Aetna", "UnitedHealth"],
+    "rating": 4.5,
+    "distance": 1.9,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "14",
+    "name": "Dr. Kevin Taylor",
+    "specialty": "Neurology",
+    "zip_code": "10014",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.7,
+    "distance": 4.5,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "15",
+    "name": "Dr. Stephanie Clark",
+    "specialty": "Cardiology",
+    "zip_code": "10015",
+    "insurances": ["Cigna", "Aetna"],
+    "rating": 4.8,
+    "distance": 5.1,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "16",
+    "name": "Dr. Mark Lewis",
+    "specialty": "Orthopedics",
+    "zip_code": "10016",
+    "insurances": ["UnitedHealth", "Blue Cross"],
+    "rating": 4.6,
+    "distance": 2.3,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "17",
+    "name": "Dr. Jessica Hall",
+    "specialty": "Sports Medicine",
+    "zip_code": "10017",
+    "insurances": ["Aetna", "Medicare"],
+    "rating": 4.7,
+    "distance": 3.9,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "18",
+    "name": "Dr. Ryan Allen",
+    "specialty": "Physical Therapy",
+    "zip_code": "10018",
+    "insurances": ["Cigna", "Blue Cross"],
+    "rating": 4.4,
+    "distance": 1.7,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "19",
+    "name": "Dr. Michelle Young",
+    "specialty": "Neurology",
+    "zip_code": "10019",
+    "insurances": ["UnitedHealth", "Aetna"],
+    "rating": 4.8,
+    "distance": 4.7,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "20",
+    "name": "Dr. Daniel King",
+    "specialty": "Cardiology",
+    "zip_code": "10020",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.9,
+    "distance": 5.3,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "21",
+    "name": "Dr. Ashley Wright",
+    "specialty": "Orthopedics",
+    "zip_code": "10021",
+    "insurances": ["Cigna", "UnitedHealth"],
+    "rating": 4.7,
+    "distance": 2.6,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "22",
+    "name": "Dr. Joshua Lopez",
+    "specialty": "Sports Medicine",
+    "zip_code": "10022",
+    "insurances": ["Blue Cross", "Aetna"],
+    "rating": 4.8,
+    "distance": 3.4,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "23",
+    "name": "Dr. Samantha Hill",
+    "specialty": "Physical Therapy",
+    "zip_code": "10023",
+    "insurances": ["Medicare", "Cigna"],
+    "rating": 4.5,
+    "distance": 1.6,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "24",
+    "name": "Dr. Matthew Scott",
+    "specialty": "Neurology",
+    "zip_code": "10024",
+    "insurances": ["Aetna", "UnitedHealth"],
+    "rating": 4.6,
+    "distance": 4.9,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "25",
+    "name": "Dr. Lauren Green",
+    "specialty": "Cardiology",
+    "zip_code": "10025",
+    "insurances": ["Blue Cross", "Cigna"],
+    "rating": 4.8,
+    "distance": 5.0,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "26",
+    "name": "Dr. Andrew Adams",
+    "specialty": "Orthopedics",
+    "zip_code": "10026",
+    "insurances": ["UnitedHealth", "Medicare"],
+    "rating": 4.7,
+    "distance": 2.4,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "27",
+    "name": "Dr. Kimberly Baker",
+    "specialty": "Sports Medicine",
+    "zip_code": "10027",
+    "insurances": ["Aetna", "Blue Cross"],
+    "rating": 4.9,
+    "distance": 3.6,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "28",
+    "name": "Dr. Jonathan Gonzalez",
+    "specialty": "Physical Therapy",
+    "zip_code": "10028",
+    "insurances": ["Cigna", "UnitedHealth"],
+    "rating": 4.4,
+    "distance": 1.8,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "29",
+    "name": "Dr. Victoria Nelson",
+    "specialty": "Neurology",
+    "zip_code": "10029",
+    "insurances": ["Blue Cross", "Aetna"],
+    "rating": 4.7,
+    "distance": 4.6,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "30",
+    "name": "Dr. Brandon Carter",
+    "specialty": "Cardiology",
+    "zip_code": "10030",
+    "insurances": ["Medicare", "Cigna"],
+    "rating": 4.8,
+    "distance": 5.2,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "31",
+    "name": "Dr. Danielle Mitchell",
+    "specialty": "Orthopedics",
+    "zip_code": "10031",
+    "insurances": ["Aetna", "UnitedHealth"],
+    "rating": 4.6,
+    "distance": 2.7,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "32",
+    "name": "Dr. Tyler Perez",
+    "specialty": "Sports Medicine",
+    "zip_code": "10032",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.8,
+    "distance": 3.8,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "33",
+    "name": "Dr. Megan Roberts",
+    "specialty": "Physical Therapy",
+    "zip_code": "10033",
+    "insurances": ["Cigna", "Aetna"],
+    "rating": 4.5,
+    "distance": 1.9,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "34",
+    "name": "Dr. Nathan Turner",
+    "specialty": "Neurology",
+    "zip_code": "10034",
+    "insurances": ["UnitedHealth", "Blue Cross"],
+    "rating": 4.7,
+    "distance": 4.8,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "35",
+    "name": "Dr. Crystal Phillips",
+    "specialty": "Cardiology",
+    "zip_code": "10035",
+    "insurances": ["Aetna", "Medicare"],
+    "rating": 4.9,
+    "distance": 5.1,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "36",
+    "name": "Dr. Zachary Campbell",
+    "specialty": "Orthopedics",
+    "zip_code": "10036",
+    "insurances": ["Cigna", "Blue Cross"],
+    "rating": 4.7,
+    "distance": 2.5,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "37",
+    "name": "Dr. Brittany Parker",
+    "specialty": "Sports Medicine",
+    "zip_code": "10037",
+    "insurances": ["UnitedHealth", "Aetna"],
+    "rating": 4.8,
+    "distance": 3.5,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "38",
+    "name": "Dr. Justin Evans",
+    "specialty": "Physical Therapy",
+    "zip_code": "10038",
+    "insurances": ["Medicare", "Cigna"],
+    "rating": 4.4,
+    "distance": 1.7,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "39",
+    "name": "Dr. Tiffany Edwards",
+    "specialty": "Neurology",
+    "zip_code": "10039",
+    "insurances": ["Blue Cross", "UnitedHealth"],
+    "rating": 4.6,
+    "distance": 4.7,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "40",
+    "name": "Dr. Derek Collins",
+    "specialty": "Cardiology",
+    "zip_code": "10040",
+    "insurances": ["Aetna", "Cigna"],
+    "rating": 4.8,
+    "distance": 5.3,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "41",
+    "name": "Dr. Natasha Stewart",
+    "specialty": "Orthopedics",
+    "zip_code": "10041",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.7,
+    "distance": 2.8,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "42",
+    "name": "Dr. Marcus Sanchez",
+    "specialty": "Sports Medicine",
+    "zip_code": "10042",
+    "insurances": ["Cigna", "UnitedHealth"],
+    "rating": 4.9,
+    "distance": 3.9,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "43",
+    "name": "Dr. Jasmine Morris",
+    "specialty": "Physical Therapy",
+    "zip_code": "10043",
+    "insurances": ["Aetna", "Blue Cross"],
+    "rating": 4.5,
+    "distance": 1.8,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "44",
+    "name": "Dr. Trevor Rogers",
+    "specialty": "Neurology",
+    "zip_code": "10044",
+    "insurances": ["UnitedHealth", "Medicare"],
+    "rating": 4.7,
+    "distance": 4.9,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "45",
+    "name": "Dr. Monique Reed",
+    "specialty": "Cardiology",
+    "zip_code": "10045",
+    "insurances": ["Blue Cross", "Aetna"],
+    "rating": 4.8,
+    "distance": 5.0,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "46",
+    "name": "Dr. Xavier Cook",
+    "specialty": "Orthopedics",
+    "zip_code": "10046",
+    "insurances": ["Cigna", "Medicare"],
+    "rating": 4.6,
+    "distance": 2.6,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "47",
+    "name": "Dr. Sierra Bailey",
+    "specialty": "Sports Medicine",
+    "zip_code": "10047",
+    "insurances": ["Aetna", "UnitedHealth"],
+    "rating": 4.8,
+    "distance": 3.7,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "48",
+    "name": "Dr. Chase Rivera",
+    "specialty": "Physical Therapy",
+    "zip_code": "10048",
+    "insurances": ["Blue Cross", "Cigna"],
+    "rating": 4.4,
+    "distance": 1.9,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "49",
+    "name": "Dr. Alexis Cooper",
+    "specialty": "Neurology",
+    "zip_code": "10049",
+    "insurances": ["Medicare", "Aetna"],
+    "rating": 4.7,
+    "distance": 4.8,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "50",
+    "name": "Dr. Jordan Richardson",
+    "specialty": "Cardiology",
+    "zip_code": "10050",
+    "insurances": ["UnitedHealth", "Blue Cross"],
+    "rating": 4.9,
+    "distance": 5.2,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "51",
+    "name": "Dr. Destiny Cox",
+    "specialty": "Orthopedics",
+    "zip_code": "10051",
+    "insurances": ["Aetna", "Cigna"],
+    "rating": 4.7,
+    "distance": 2.9,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "52",
+    "name": "Dr. Blake Howard",
+    "specialty": "Sports Medicine",
+    "zip_code": "10052",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.8,
+    "distance": 3.8,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "53",
+    "name": "Dr. Trinity Ward",
+    "specialty": "Physical Therapy",
+    "zip_code": "10053",
+    "insurances": ["Cigna", "UnitedHealth"],
+    "rating": 4.5,
+    "distance": 1.7,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "54",
+    "name": "Dr. Phoenix Torres",
+    "specialty": "Neurology",
+    "zip_code": "10054",
+    "insurances": ["Aetna", "Blue Cross"],
+    "rating": 4.6,
+    "distance": 4.7,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "55",
+    "name": "Dr. Nova Peterson",
+    "specialty": "Cardiology",
+    "zip_code": "10055",
+    "insurances": ["UnitedHealth", "Medicare"],
+    "rating": 4.8,
+    "distance": 5.1,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "56",
+    "name": "Dr. Atlas Gray",
+    "specialty": "Orthopedics",
+    "zip_code": "10056",
+    "insurances": ["Blue Cross", "Aetna"],
+    "rating": 4.7,
+    "distance": 2.7,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "57",
+    "name": "Dr. Luna James",
+    "specialty": "Sports Medicine",
+    "zip_code": "10057",
+    "insurances": ["Cigna", "Medicare"],
+    "rating": 4.9,
+    "distance": 3.9,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "58",
+    "name": "Dr. Orion Watson",
+    "specialty": "Physical Therapy",
+    "zip_code": "10058",
+    "insurances": ["Aetna", "UnitedHealth"],
+    "rating": 4.4,
+    "distance": 1.8,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "59",
+    "name": "Dr. Aurora Brooks",
+    "specialty": "Neurology",
+    "zip_code": "10059",
+    "insurances": ["Blue Cross", "Cigna"],
+    "rating": 4.7,
+    "distance": 4.8,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "60",
+    "name": "Dr. Atlas Kelly",
+    "specialty": "Cardiology",
+    "zip_code": "10060",
+    "insurances": ["Medicare", "Aetna"],
+    "rating": 4.8,
+    "distance": 5.3,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "61",
+    "name": "Dr. Nova Sanders",
+    "specialty": "Orthopedics",
+    "zip_code": "10061",
+    "insurances": ["UnitedHealth", "Blue Cross"],
+    "rating": 4.6,
+    "distance": 2.8,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "62",
+    "name": "Dr. Phoenix Price",
+    "specialty": "Sports Medicine",
+    "zip_code": "10062",
+    "insurances": ["Cigna", "Aetna"],
+    "rating": 4.8,
+    "distance": 3.7,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "63",
+    "name": "Dr. Trinity Bennett",
+    "specialty": "Physical Therapy",
+    "zip_code": "10063",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.5,
+    "distance": 1.9,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "64",
+    "name": "Dr. Orion Wood",
+    "specialty": "Neurology",
+    "zip_code": "10064",
+    "insurances": ["Aetna", "UnitedHealth"],
+    "rating": 4.7,
+    "distance": 4.9,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "65",
+    "name": "Dr. Aurora Barnes",
+    "specialty": "Cardiology",
+    "zip_code": "10065",
+    "insurances": ["Cigna", "Blue Cross"],
+    "rating": 4.9,
+    "distance": 5.0,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "66",
+    "name": "Dr. Atlas Ross",
+    "specialty": "Orthopedics",
+    "zip_code": "10066",
+    "insurances": ["Medicare", "Aetna"],
+    "rating": 4.7,
+    "distance": 2.6,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "67",
+    "name": "Dr. Nova Henderson",
+    "specialty": "Sports Medicine",
+    "zip_code": "10067",
+    "insurances": ["Blue Cross", "UnitedHealth"],
+    "rating": 4.8,
+    "distance": 3.8,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "68",
+    "name": "Dr. Phoenix Coleman",
+    "specialty": "Physical Therapy",
+    "zip_code": "10068",
+    "insurances": ["Cigna", "Medicare"],
+    "rating": 4.4,
+    "distance": 1.7,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "69",
+    "name": "Dr. Trinity Jenkins",
+    "specialty": "Neurology",
+    "zip_code": "10069",
+    "insurances": ["Aetna", "Blue Cross"],
+    "rating": 4.6,
+    "distance": 4.7,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "70",
+    "name": "Dr. Orion Perry",
+    "specialty": "Cardiology",
+    "zip_code": "10070",
+    "insurances": ["UnitedHealth", "Cigna"],
+    "rating": 4.8,
+    "distance": 5.2,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "71",
+    "name": "Dr. Aurora Powell",
+    "specialty": "Orthopedics",
+    "zip_code": "10071",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.7,
+    "distance": 2.9,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "72",
+    "name": "Dr. Atlas Long",
+    "specialty": "Sports Medicine",
+    "zip_code": "10072",
+    "insurances": ["Aetna", "Cigna"],
+    "rating": 4.9,
+    "distance": 3.6,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "73",
+    "name": "Dr. Nova Patterson",
+    "specialty": "Physical Therapy",
+    "zip_code": "10073",
+    "insurances": ["UnitedHealth", "Blue Cross"],
+    "rating": 4.5,
+    "distance": 1.8,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "74",
+    "name": "Dr. Phoenix Hughes",
+    "specialty": "Neurology",
+    "zip_code": "10074",
+    "insurances": ["Cigna", "Medicare"],
+    "rating": 4.7,
+    "distance": 4.8,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "75",
+    "name": "Dr. Trinity Flores",
+    "specialty": "Cardiology",
+    "zip_code": "10075",
+    "insurances": ["Aetna", "UnitedHealth"],
+    "rating": 4.8,
+    "distance": 5.1,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "76",
+    "name": "Dr. Orion Washington",
+    "specialty": "Orthopedics",
+    "zip_code": "10076",
+    "insurances": ["Blue Cross", "Cigna"],
+    "rating": 4.6,
+    "distance": 2.7,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "77",
+    "name": "Dr. Aurora Butler",
+    "specialty": "Sports Medicine",
+    "zip_code": "10077",
+    "insurances": ["Medicare", "Aetna"],
+    "rating": 4.8,
+    "distance": 3.9,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "78",
+    "name": "Dr. Atlas Simmons",
+    "specialty": "Physical Therapy",
+    "zip_code": "10078",
+    "insurances": ["UnitedHealth", "Cigna"],
+    "rating": 4.4,
+    "distance": 1.9,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "79",
+    "name": "Dr. Nova Foster",
+    "specialty": "Neurology",
+    "zip_code": "10079",
+    "insurances": ["Blue Cross", "Aetna"],
+    "rating": 4.7,
+    "distance": 4.9,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "80",
+    "name": "Dr. Phoenix Gonzales",
+    "specialty": "Cardiology",
+    "zip_code": "10080",
+    "insurances": ["Cigna", "Medicare"],
+    "rating": 4.9,
+    "distance": 5.0,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "81",
+    "name": "Dr. Trinity Bryant",
+    "specialty": "Orthopedics",
+    "zip_code": "10081",
+    "insurances": ["Aetna", "UnitedHealth"],
+    "rating": 4.7,
+    "distance": 2.8,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "82",
+    "name": "Dr. Orion Alexander",
+    "specialty": "Sports Medicine",
+    "zip_code": "10082",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.8,
+    "distance": 3.7,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "83",
+    "name": "Dr. Aurora Russell",
+    "specialty": "Physical Therapy",
+    "zip_code": "10083",
+    "insurances": ["Cigna", "Aetna"],
+    "rating": 4.5,
+    "distance": 1.8,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "84",
+    "name": "Dr. Atlas Griffin",
+    "specialty": "Neurology",
+    "zip_code": "10084",
+    "insurances": ["UnitedHealth", "Blue Cross"],
+    "rating": 4.6,
+    "distance": 4.7,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "85",
+    "name": "Dr. Nova Diaz",
+    "specialty": "Cardiology",
+    "zip_code": "10085",
+    "insurances": ["Medicare", "Cigna"],
+    "rating": 4.8,
+    "distance": 5.2,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "86",
+    "name": "Dr. Phoenix Hayes",
+    "specialty": "Orthopedics",
+    "zip_code": "10086",
+    "insurances": ["Aetna", "Blue Cross"],
+    "rating": 4.7,
+    "distance": 2.9,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "87",
+    "name": "Dr. Trinity Myers",
+    "specialty": "Sports Medicine",
+    "zip_code": "10087",
+    "insurances": ["Cigna", "UnitedHealth"],
+    "rating": 4.9,
+    "distance": 3.8,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "88",
+    "name": "Dr. Orion Ford",
+    "specialty": "Physical Therapy",
+    "zip_code": "10088",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.4,
+    "distance": 1.7,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "89",
+    "name": "Dr. Aurora Ortiz",
+    "specialty": "Neurology",
+    "zip_code": "10089",
+    "insurances": ["Aetna", "Cigna"],
+    "rating": 4.7,
+    "distance": 4.8,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "90",
+    "name": "Dr. Atlas Murray",
+    "specialty": "Cardiology",
+    "zip_code": "10090",
+    "insurances": ["UnitedHealth", "Medicare"],
+    "rating": 4.8,
+    "distance": 5.1,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "91",
+    "name": "Dr. Nova Freeman",
+    "specialty": "Orthopedics",
+    "zip_code": "10091",
+    "insurances": ["Cigna", "Aetna"],
+    "rating": 4.6,
+    "distance": 2.6,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "92",
+    "name": "Dr. Phoenix Wells",
+    "specialty": "Sports Medicine",
+    "zip_code": "10092",
+    "insurances": ["Blue Cross", "UnitedHealth"],
+    "rating": 4.8,
+    "distance": 3.9,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "93",
+    "name": "Dr. Trinity Webb",
+    "specialty": "Physical Therapy",
+    "zip_code": "10093",
+    "insurances": ["Medicare", "Cigna"],
+    "rating": 4.5,
+    "distance": 1.9,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "94",
+    "name": "Dr. Orion Simpson",
+    "specialty": "Neurology",
+    "zip_code": "10094",
+    "insurances": ["Aetna", "Blue Cross"],
+    "rating": 4.7,
+    "distance": 4.7,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "95",
+    "name": "Dr. Aurora Stevens",
+    "specialty": "Cardiology",
+    "zip_code": "10095",
+    "insurances": ["Cigna", "UnitedHealth"],
+    "rating": 4.9,
+    "distance": 5.0,
+    "availability_date": "2024-01-18"
+  },
+  {
+    "id": "96",
+    "name": "Dr. Atlas Tucker",
+    "specialty": "Orthopedics",
+    "zip_code": "10096",
+    "insurances": ["Blue Cross", "Medicare"],
+    "rating": 4.7,
+    "distance": 2.8,
+    "availability_date": "2024-01-15"
+  },
+  {
+    "id": "97",
+    "name": "Dr. Nova Porter",
+    "specialty": "Sports Medicine",
+    "zip_code": "10097",
+    "insurances": ["Aetna", "Cigna"],
+    "rating": 4.8,
+    "distance": 3.7,
+    "availability_date": "2024-01-16"
+  },
+  {
+    "id": "98",
+    "name": "Dr. Phoenix Hunter",
+    "specialty": "Physical Therapy",
+    "zip_code": "10098",
+    "insurances": ["UnitedHealth", "Blue Cross"],
+    "rating": 4.4,
+    "distance": 1.8,
+    "availability_date": "2024-01-14"
+  },
+  {
+    "id": "99",
+    "name": "Dr. Trinity Crawford",
+    "specialty": "Neurology",
+    "zip_code": "10099",
+    "insurances": ["Cigna", "Medicare"],
+    "rating": 4.6,
+    "distance": 4.8,
+    "availability_date": "2024-01-17"
+  },
+  {
+    "id": "100",
+    "name": "Dr. Orion Henry",
+    "specialty": "Cardiology",
+    "zip_code": "10100",
+    "insurances": ["Aetna", "UnitedHealth"],
+    "rating": 4.8,
+    "distance": 5.2,
+    "availability_date": "2024-01-18"
+  }
+] 
