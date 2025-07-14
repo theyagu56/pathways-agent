@@ -45,7 +45,36 @@ const ProviderMatching: React.FC = () => {
     setLoading(true);
     setError(null);
 
+    // Form validation
+    if (!formData.injury_description.trim()) {
+      setError('Please describe your injury or condition.');
+      setLoading(false);
+      return;
+    }
+    
+    if (!formData.zip_code.trim()) {
+      setError('Please enter your ZIP code.');
+      setLoading(false);
+      return;
+    }
+    
+    if (!formData.insurance) {
+      setError('Please select your insurance provider.');
+      setLoading(false);
+      return;
+    }
+    
+    // Validate ZIP code format (basic)
+    const zipRegex = /^\d{5}(-\d{4})?$/;
+    if (!zipRegex.test(formData.zip_code.trim())) {
+      setError('Please enter a valid 5-digit ZIP code.');
+      setLoading(false);
+      return;
+    }
+
     try {
+      console.log('🚀 Sending provider matching request:', formData);
+      
       const response = await fetch('http://localhost:8000/api/match-providers', {
         method: 'POST',
         headers: {
@@ -54,14 +83,47 @@ const ProviderMatching: React.FC = () => {
         body: JSON.stringify(formData)
       });
 
+      console.log('📡 Response status:', response.status);
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('❌ API Error Response:', errorText);
+        
+        let errorMessage = `Server error (${response.status})`;
+        try {
+          const errorData = JSON.parse(errorText);
+          errorMessage = errorData.detail || errorMessage;
+        } catch {
+          errorMessage = errorText || errorMessage;
+        }
+        
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
+      console.log('✅ Received providers:', data);
       setProviders(data);
+      
+      if (data.length === 0) {
+        setError('No providers found matching your criteria. Try adjusting your search parameters.');
+      }
+      
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      console.error('❌ Error in handleSubmit:', err);
+      
+      let errorMessage = 'An unexpected error occurred';
+      
+      if (err instanceof Error) {
+        if (err.message.includes('Failed to fetch')) {
+          errorMessage = 'Cannot connect to the server. Please make sure the backend is running on http://localhost:8000';
+        } else if (err.message.includes('NetworkError')) {
+          errorMessage = 'Network error. Please check your internet connection.';
+        } else {
+          errorMessage = err.message;
+        }
+      }
+      
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -173,13 +235,33 @@ const ProviderMatching: React.FC = () => {
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                 </svg>
               </div>
-              <div className="ml-3">
+              <div className="ml-3 flex-1">
                 <h3 className="text-sm font-medium text-red-800">
                   Error
                 </h3>
                 <div className="mt-2 text-sm text-red-700">
                   {error}
                 </div>
+                {error.includes('Cannot connect to the server') && (
+                  <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
+                    <h4 className="text-sm font-medium text-yellow-800 mb-2">💡 Troubleshooting Tips:</h4>
+                    <ul className="text-sm text-yellow-700 space-y-1">
+                      <li>• Make sure the backend server is running on port 8000</li>
+                      <li>• Check that you're running: <code className="bg-yellow-100 px-1 rounded">python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload</code></li>
+                      <li>• Verify the backend is accessible at <a href="http://localhost:8000" target="_blank" className="underline">http://localhost:8000</a></li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+              <div className="flex-shrink-0">
+                <button
+                  onClick={() => setError(null)}
+                  className="text-red-400 hover:text-red-600"
+                >
+                  <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>

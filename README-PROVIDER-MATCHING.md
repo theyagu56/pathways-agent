@@ -189,3 +189,42 @@ For issues or questions:
 - Appointment scheduling integration
 - User authentication and profiles
 - Provider reviews and ratings 
+
+## 🛠️ Troubleshooting
+
+### Git Push Permission Denied (403)
+If you see an error like:
+```
+remote: Permission to <repo>.git denied to <user>.
+fatal: unable to access 'https://github.com/<repo>.git/': The requested URL returned error: 403
+```
+**How to fix:**
+1. Make sure you are logged in to GitHub and have push access to the repository.
+2. If using HTTPS, GitHub requires a Personal Access Token (PAT) instead of your password. [Create a token here.](https://github.com/settings/tokens)
+3. When prompted for a password, use your PAT.
+4. If you have cached old credentials, clear them:
+   - On macOS: Open Keychain Access and search for 'github', then delete old credentials.
+   - Or run: `git credential-cache exit`
+5. Try pushing again. If you still see the error, check your remote URL:
+   ```sh
+   git remote -v
+   # If needed, update:
+   git remote set-url origin https://github.com/<your-username>/<repo>.git
+   ```
+
+### React App: HOST Environment Variable Error
+If you see this error when starting the React app:
+```
+Attempting to bind to HOST environment variable: arm64-apple-darwin20.0.0
+Error: getaddrinfo ENOTFOUND arm64-apple-darwin20.0.0
+```
+**How to fix:**
+1. Unset the HOST variable in your terminal:
+   ```sh
+   unset HOST
+   ```
+2. Then start the React app again:
+   ```sh
+   npm start
+   ```
+If the problem persists, check your shell config files (e.g., `~/.zshrc`, `~/.bash_profile`) for any lines setting `HOST=...` and remove or comment them out. 
