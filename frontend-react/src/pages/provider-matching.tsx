@@ -14,7 +14,11 @@ interface MatchRequest {
   insurance: string;
 }
 
-const ProviderMatching: React.FC = () => {
+interface ProviderMatchingProps {
+  addLog: (type: 'info' | 'warning' | 'error' | 'success', message: string, details?: string) => void;
+}
+
+const ProviderMatching: React.FC<ProviderMatchingProps> = ({ addLog }) => {
   const [formData, setFormData] = useState<MatchRequest>({
     injury_description: '',
     zip_code: '',
@@ -48,18 +52,21 @@ const ProviderMatching: React.FC = () => {
     // Form validation
     if (!formData.injury_description.trim()) {
       setError('Please describe your injury or condition.');
+      addLog('error', 'Form validation failed', 'Injury description is required');
       setLoading(false);
       return;
     }
     
     if (!formData.zip_code.trim()) {
       setError('Please enter your ZIP code.');
+      addLog('error', 'Form validation failed', 'ZIP code is required');
       setLoading(false);
       return;
     }
     
     if (!formData.insurance) {
       setError('Please select your insurance provider.');
+      addLog('error', 'Form validation failed', 'Insurance provider is required');
       setLoading(false);
       return;
     }
@@ -68,12 +75,16 @@ const ProviderMatching: React.FC = () => {
     const zipRegex = /^\d{5}(-\d{4})?$/;
     if (!zipRegex.test(formData.zip_code.trim())) {
       setError('Please enter a valid 5-digit ZIP code.');
+      addLog('error', 'Form validation failed', 'Invalid ZIP code format');
       setLoading(false);
       return;
     }
 
+    addLog('info', 'Starting provider search', `Injury: ${formData.injury_description}, ZIP: ${formData.zip_code}, Insurance: ${formData.insurance}`);
+
     try {
       console.log('🚀 Sending provider matching request:', formData);
+      addLog('info', 'Sending API request', 'Connecting to backend server...');
       
       const response = await fetch('http://localhost:8000/api/match-providers', {
         method: 'POST',
@@ -84,6 +95,7 @@ const ProviderMatching: React.FC = () => {
       });
 
       console.log('📡 Response status:', response.status);
+      addLog('info', 'Received API response', `Status: ${response.status}`);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -97,6 +109,7 @@ const ProviderMatching: React.FC = () => {
           errorMessage = errorText || errorMessage;
         }
         
+        addLog('error', 'API request failed', errorMessage);
         throw new Error(errorMessage);
       }
 
@@ -106,6 +119,9 @@ const ProviderMatching: React.FC = () => {
       
       if (data.length === 0) {
         setError('No providers found matching your criteria. Try adjusting your search parameters.');
+        addLog('warning', 'No providers found', 'Try adjusting search criteria');
+      } else {
+        addLog('success', 'Providers found', `Found ${data.length} matching providers`);
       }
       
     } catch (err) {
@@ -116,10 +132,13 @@ const ProviderMatching: React.FC = () => {
       if (err instanceof Error) {
         if (err.message.includes('Failed to fetch')) {
           errorMessage = 'Cannot connect to the server. Please make sure the backend is running on http://localhost:8000';
+          addLog('error', 'Connection failed', 'Backend server not accessible');
         } else if (err.message.includes('NetworkError')) {
           errorMessage = 'Network error. Please check your internet connection.';
+          addLog('error', 'Network error', 'Check internet connection');
         } else {
           errorMessage = err.message;
+          addLog('error', 'Request failed', errorMessage);
         }
       }
       
@@ -130,17 +149,16 @@ const ProviderMatching: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Pathways Agent
-          </h1>
-          <p className="text-xl text-gray-600">
-            Find the right healthcare provider for your needs
-          </p>
-        </div>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="text-center">
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          Provider Matching
+        </h1>
+        <p className="text-lg text-gray-600">
+          Find the right healthcare provider for your needs
+        </p>
+      </div>
 
         {/* Form */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -248,7 +266,7 @@ const ProviderMatching: React.FC = () => {
                     <ul className="text-sm text-yellow-700 space-y-1">
                       <li>• Make sure the backend server is running on port 8000</li>
                       <li>• Check that you're running: <code className="bg-yellow-100 px-1 rounded">python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload</code></li>
-                      <li>• Verify the backend is accessible at <a href="http://localhost:8000" target="_blank" className="underline">http://localhost:8000</a></li>
+                      <li>• Verify the backend is accessible at <a href="http://localhost:8000" target="_blank" rel="noreferrer" className="underline">http://localhost:8000</a></li>
                     </ul>
                   </div>
                 )}
@@ -318,7 +336,6 @@ const ProviderMatching: React.FC = () => {
             </div>
           </div>
         )}
-      </div>
     </div>
   );
 };
