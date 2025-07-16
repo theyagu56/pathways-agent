@@ -31,6 +31,13 @@ const Layout: React.FC<LayoutProps> = ({ children, logs, addLog, clearLogs }) =>
       description: 'Main dashboard'
     },
     {
+      id: 'patient-intake',
+      name: 'Patient Intake',
+      icon: '👤',
+      path: '/patient-intake',
+      description: 'Patient information and intake form'
+    },
+    {
       id: 'referral-management',
       name: 'Referral Management',
       icon: '🏥',
@@ -49,7 +56,7 @@ const Layout: React.FC<LayoutProps> = ({ children, logs, addLog, clearLogs }) =>
       name: 'Documents',
       icon: '📄',
       path: '/documents',
-      description: 'Medical documents and records'
+      description: 'Manage documents'
     },
     {
       id: 'settings',

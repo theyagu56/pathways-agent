@@ -6,6 +6,7 @@ import ProviderMatching from './pages/provider-matching';
 import Appointments from './pages/Appointments';
 import Documents from './pages/Documents';
 import Settings from './pages/Settings';
+import PatientIntakeForm from './components/PatientIntakeForm';
 
 interface LogEntry {
   id: string;
@@ -38,6 +39,16 @@ function App() {
       <Layout logs={logs} addLog={addLog} clearLogs={clearLogs}>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/patient-intake" element={
+            <PatientIntakeForm
+              familyMembers={[]}
+              insuranceProviders={[]}
+              mode="dashboard"
+              onSubmit={(data) => {
+                console.log('Form submitted:', data);
+              }}
+            />
+          } />
           <Route path="/referral-management" element={<ProviderMatching addLog={addLog} />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/documents" element={<Documents />} />
