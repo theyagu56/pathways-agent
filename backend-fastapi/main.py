@@ -1,10 +1,20 @@
+# Initialize logging first
+from utils.logger import get_logger
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
+
+# Get logger for main module
+logger = get_logger(__name__)
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
 from routes.match_providers import router as match_providers_router
 from routes.insurances import router as insurances_router
 
-load_dotenv()
+logger.info("Starting Pathways AI Provider Matching API")
 
 app = FastAPI(title="Pathways Agent Provider Matching API")
 
@@ -19,9 +29,14 @@ app.add_middleware(
 app.include_router(match_providers_router)
 app.include_router(insurances_router)
 
+logger.info("FastAPI app configured with CORS and routers")
+
 @app.get("/")
 async def root():
-    return {"message": "Pathways Agent Provider Matching API"}
+    logger.info("Root endpoint accessed")
+    return {"message": "Pathways AI Provider Matching API is running"}
+
+logger.info("Application startup complete")
 
 if __name__ == "__main__":
     import uvicorn
