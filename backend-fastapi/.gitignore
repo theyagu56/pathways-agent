@@ -58,4 +58,4 @@ Thumbs.db
 
 # Azure specific
 .azure/
-azure-deployment/ 
+azure-deployment/ .env
