@@ -3,3 +3,6 @@ uvicorn
 sqlalchemy
 pydantic
 python-dotenv
+pandas>=2.0.0
+langchain-community>=0.1.0
+openai>=1.0.0

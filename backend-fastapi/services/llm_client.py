@@ -65,6 +65,8 @@ class LLMClient:
             f"Injury description: '{injury_description}'\nSpecialties:"
         )
         
+        logger.debug(f"LLM prompt: {prompt}")
+        
         if not self.client:
             logger.warning("LLM client not initialized. Returning fallback specialties.")
             fallback_specialties = ["Orthopedics", "Sports Medicine", "Physical Therapy"]
