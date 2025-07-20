@@ -14,10 +14,23 @@ const ProviderMatching: React.FC<ProviderMatchingProps> = ({ addLog }) => {
   const [insuranceOptions, setInsuranceOptions] = useState<string[]>([]);
 
   useEffect(() => {
+    console.log("Fetching insurance options...");
     fetch("http://localhost:8000/api/insurances")
-      .then(res => res.json())
-      .then(data => setInsuranceOptions(data))
-      .catch(() => setInsuranceOptions([]));
+      .then(res => {
+        console.log("Insurance API response status:", res.status);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(data => {
+        console.log("Insurance options received:", data);
+        setInsuranceOptions(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching insurance options:", error);
+        setInsuranceOptions([]);
+      });
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {

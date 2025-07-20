@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
-from services.llm_client import LLMClient
+from services.specialty_service import SpecialtyService
 from services.vector_store import VectorStore
 from services.provider_ranker import rank_providers
 from services.provider_loader import get_providers
@@ -32,12 +32,12 @@ async def match_providers(request: ProviderMatchRequest):
         providers = get_providers()
         logger.info(f"Loaded {len(providers)} providers from data source")
         
-        logger.debug("Initializing LLM client for specialty recommendation")
-        llm = LLMClient()
+        logger.debug("Initializing SpecialtyService for enhanced specialty recommendations")
+        specialty_service = SpecialtyService()
         
-        logger.debug("Getting specialty recommendations from LLM")
-        specialties = llm.get_specialties(request.injury_description)
-        logger.info(f"LLM recommended specialties: {specialties}")
+        logger.debug("Getting specialty recommendations using data-driven approach")
+        specialties = specialty_service.get_specialty_recommendations(request.injury_description)
+        logger.info(f"Specialty recommendations: {specialties}")
         
         # Optionally use vector store for semantic search (not required for ranking demo)
         # logger.debug("Initializing vector store for semantic search")

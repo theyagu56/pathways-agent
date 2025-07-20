@@ -5,6 +5,11 @@ from typing import List, Dict
 
 _provider_cache = None
 
+def clear_provider_cache():
+    """Clear the provider cache to force reload of data"""
+    global _provider_cache
+    _provider_cache = None
+
 def get_providers() -> List[Dict]:
     global _provider_cache
     if _provider_cache is not None:

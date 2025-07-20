@@ -13,6 +13,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.match_providers import router as match_providers_router
 from routes.insurances import router as insurances_router
+from routes.specialties import router as specialties_router
 
 logger.info("Starting Pathways AI Provider Matching API")
 
@@ -28,6 +29,7 @@ app.add_middleware(
 
 app.include_router(match_providers_router)
 app.include_router(insurances_router)
+app.include_router(specialties_router)
 
 logger.info("FastAPI app configured with CORS and routers")
 

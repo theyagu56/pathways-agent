@@ -1,94 +1,78 @@
 import os
-from langchain_community.chat_models import ChatOpenAI, AzureChatOpenAI
+from typing import List
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
 
 class LLMClient:
     def __init__(self):
-        logger.debug("Initializing LLMClient")
-        use_azure = os.getenv("USE_AZURE_OPENAI", "false").lower() == "true"
-        self.use_azure = use_azure
+        self.use_azure = os.getenv("USE_AZURE_OPENAI", "false").lower() == "true"
         self.client = None
-        
-        logger.info(f"LLM Configuration - Use Azure: {use_azure}")
-        
+        self._initialize_client()
+    
+    def _initialize_client(self):
+        """Initialize the LLM client based on environment configuration"""
         try:
-            if use_azure:
-                logger.debug("Configuring Azure OpenAI client")
-                azure_key = os.getenv("AZURE_OPENAI_API_KEY")
-                azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
-                deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+            if self.use_azure:
+                logger.info("LLM Configuration - Use Azure: True")
+                from langchain_openai import AzureChatOpenAI
                 
-                logger.debug(f"Azure config - Key present: {bool(azure_key)}, Endpoint: {azure_endpoint}, Deployment: {deployment_name}")
-                
-                if not (azure_key and azure_endpoint and deployment_name):
-                    logger.error("Azure OpenAI configuration missing in .env. Falling back to default specialties.")
-                    logger.debug("Missing configs - Key: %s, Endpoint: %s, Deployment: %s", 
-                               bool(azure_key), bool(azure_endpoint), bool(deployment_name))
-                else:
-                    self.client = AzureChatOpenAI(
-                        api_key=azure_key,
-                        azure_endpoint=azure_endpoint,
-                        azure_deployment=deployment_name,
-                        api_version=os.getenv("AZURE_OPENAI_API_VERSION", "2023-03-15-preview")
-                    )
-                    logger.info("Azure OpenAI client initialized successfully")
+                self.client = AzureChatOpenAI(
+                    azure_deployment=os.getenv("AZURE_DEPLOYMENT_NAME", "gpt-4"),
+                    openai_api_version=os.getenv("AZURE_OPENAI_API_VERSION", "2023-05-15"),
+                    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+                    openai_api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+                    temperature=0.1
+                )
+                logger.info("Azure OpenAI client initialized successfully")
             else:
-                logger.debug("Configuring OpenAI client")
-                openai_key = os.getenv("OPENAI_API_KEY")
+                logger.info("LLM Configuration - Use Azure: False")
+                from langchain_openai import ChatOpenAI
                 
-                logger.debug(f"OpenAI config - Key present: {bool(openai_key)}")
-                if openai_key:
-                    logger.debug(f"OpenAI key length: {len(openai_key)}")
-                    logger.debug(f"OpenAI key prefix: {openai_key[:10]}...")
+                self.client = ChatOpenAI(
+                    model=os.getenv("OPENAI_MODEL", "gpt-3.5-turbo"),
+                    openai_api_key=os.getenv("OPENAI_API_KEY"),
+                    temperature=0.1
+                )
+                logger.info("OpenAI client initialized successfully")
                 
-                if not openai_key:
-                    logger.error("OpenAI API key missing in .env. Falling back to default specialties.")
-                else:
-                    self.client = ChatOpenAI(
-                        api_key=openai_key,
-                        model=os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
-                    )
-                    logger.info("OpenAI client initialized successfully")
-                    
         except Exception as e:
-            logger.error(f"LLMClient initialization error: {e}", exc_info=True)
-            self.client = None
-
-    def get_specialties(self, injury_description: str) -> list:
-        logger.debug(f"Getting specialties for injury: {injury_description}")
-        
-        prompt = (
-            "You are a medical specialist who recommends the most appropriate medical specialties for treating specific injuries or conditions. "
-            "Return only 2-3 specialty names, separated by commas.\n"
-            f"Injury description: '{injury_description}'\nSpecialties:"
-        )
-        
-        logger.debug(f"LLM prompt: {prompt}")
-        
-        if not self.client:
-            logger.warning("LLM client not initialized. Returning fallback specialties.")
-            fallback_specialties = ["Orthopedics", "Sports Medicine", "Physical Therapy"]
-            logger.debug(f"Returning fallback specialties: {fallback_specialties}")
-            return fallback_specialties
-            
+            logger.error(f"Failed to initialize LLM client: {e}")
+            raise
+    
+    def get_specialties(self, injury_description: str, available_specialties: List[str] = None) -> List[str]:
+        """Get specialty recommendations from LLM"""
         try:
             logger.info("Making LLM API call for specialty recommendation")
-            response = self.client.invoke(prompt)
-            content = response.content.strip()
-            specialties = [s.strip() for s in content.split(",") if s.strip()]
             
-            logger.info(f"LLM response received - Raw: '{content}'")
+            if available_specialties:
+                specialties_list = ", ".join(sorted(available_specialties))
+                prompt = f"""You are a medical specialist who recommends the most appropriate medical specialties for treating specific injuries or conditions.
+
+Available specialties in our system: {specialties_list}
+
+Based on this injury description: '{injury_description}', what are the 2-3 most appropriate medical specialties from the available list above? Return only the specialty names separated by commas.
+
+Specialties:"""
+            else:
+                prompt = f"""You are a medical specialist who recommends the most appropriate medical specialties for treating specific injuries or conditions.
+
+Based on this injury description: '{injury_description}', what are the 2-3 most appropriate medical specialties? Return only the specialty names separated by commas.
+
+Specialties:"""
+            
+            logger.info(prompt)
+            response = self.client.invoke(prompt)
+            raw_response = response.content.strip()
+            
+            logger.info(f"LLM response received - Raw: '{raw_response}'")
+            
+            # Parse the response to extract specialty names
+            specialties = [s.strip() for s in raw_response.split(',')]
             logger.info(f"Parsed specialties: {specialties}")
             
-            if not specialties:
-                raise ValueError("No specialties returned from LLM.")
-                
             return specialties
             
         except Exception as e:
-            logger.error(f"LLMClient error during API call: {e}", exc_info=True)
-            fallback_specialties = ["Orthopedics", "Sports Medicine", "Physical Therapy"]
-            logger.info(f"Returning fallback specialties due to error: {fallback_specialties}")
-            return fallback_specialties 
+            logger.error(f"Error in LLM call: {e}")
+            return [] 
