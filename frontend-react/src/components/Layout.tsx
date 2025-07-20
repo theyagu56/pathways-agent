@@ -19,6 +19,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, logs, addLog, clearLogs }) => {
   const [showEvents, setShowEvents] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false); // <-- NEW
   const location = useLocation();
 
   // Navigation menu items
@@ -106,31 +107,60 @@ const Layout: React.FC<LayoutProps> = ({ children, logs, addLog, clearLogs }) =>
     }
   };
 
-  return (
-    <div className="flex h-screen bg-gray-50">
-      {/* Left Sidebar */}
-      <div className="w-64 bg-white shadow-lg">
-        {/* Logo/Brand */}
-        <div className="p-6 border-b border-gray-200">
-          <h1 className="text-2xl font-bold text-gray-900">Pathways Agent</h1>
-          <p className="text-sm text-gray-600">Healthcare Management</p>
-        </div>
+  const getHeading = (path: string) => {
+    const item = menuItems.find(item => item.path === path);
+    return item ? item.name : 'Dashboard';
+  };
 
+  const EventIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M19 11H5M19 11a7 7 0 0 1-7-7V3M12 12V3M3 11a7 7 0 0 1 7-7v14a7 7 0 0 1-7-7" />
+    </svg>
+  );
+
+  const ProfileIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+    </svg>
+  );
+
+  return (
+    <div className="flex h-screen bg-gray-50 overflow-x-hidden">
+      {/* Mobile Hamburger Button */}
+      <button
+        className="fixed top-2 left-2 z-30 md:hidden flex flex-col justify-center items-center w-8 h-8 bg-white rounded shadow-lg focus:outline-none"
+        onClick={() => setShowSidebar(true)}
+        aria-label="Open menu"
+        type="button"
+      >
+        <span className="block w-5 h-0.5 bg-gray-800 mb-1"></span>
+        <span className="block w-5 h-0.5 bg-gray-800 mb-1"></span>
+        <span className="block w-5 h-0.5 bg-gray-800"></span>
+      </button>
+
+      {/* Sidebar (Desktop) */}
+      <div className="w-64 bg-white shadow-lg hidden md:block h-full">
+        {/* Logo/Brand */}
+        <div className="p-4 border-b border-gray-200">
+          <h1 className="text-xl font-bold text-gray-900">Pathways Agent</h1>
+          <p className="text-xs text-gray-600">Healthcare Management</p>
+        </div>
         {/* Navigation Menu */}
-        <nav className="mt-6">
-          <div className="px-4 space-y-2">
+        <nav className="mt-4">
+          <div className="px-2 space-y-1">
             {menuItems.map((item) => (
               <Link
                 key={item.id}
                 to={item.path}
-                className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+                className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors text-sm ${
                   location.pathname === item.path
                     ? 'bg-blue-100 text-blue-700 border-r-2 border-blue-700'
                     : 'text-gray-700 hover:bg-gray-100'
                 }`}
                 title={item.description}
               >
-                <span className="text-xl">{item.icon}</span>
+                <span className="text-lg">{item.icon}</span>
                 <span className="font-medium">{item.name}</span>
               </Link>
             ))}
@@ -138,51 +168,86 @@ const Layout: React.FC<LayoutProps> = ({ children, logs, addLog, clearLogs }) =>
         </nav>
       </div>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Navigation Bar */}
-        <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex justify-between items-center px-6 py-4">
-            {/* Page Title */}
-            <div>
-              <h2 className="text-xl font-semibold text-gray-900">
-                {menuItems.find(item => item.path === location.pathname)?.name || 'Dashboard'}
-              </h2>
-              <p className="text-sm text-gray-600">
-                {menuItems.find(item => item.path === location.pathname)?.description || 'Welcome to Pathways Agent'}
-              </p>
-            </div>
-
-            {/* Top Right Icons */}
-            <div className="flex items-center space-x-4">
-              {/* Events Icon */}
+      {/* Sidebar Drawer (Mobile) */}
+      {showSidebar && (
+        <>
+          {/* Overlay */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-40 z-20 md:hidden"
+            onClick={() => setShowSidebar(false)}
+          ></div>
+          {/* Drawer */}
+          <div className="fixed top-0 left-0 w-64 h-full bg-white shadow-lg z-30 md:hidden flex flex-col">
+            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+              <div>
+                <h1 className="text-xl font-bold text-gray-900">Pathways Agent</h1>
+                <p className="text-xs text-gray-600">Healthcare Management</p>
+              </div>
               <button
-                onClick={() => setShowEvents(!showEvents)}
-                className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="ml-2 text-gray-600 hover:text-gray-900 focus:outline-none"
+                onClick={() => setShowSidebar(false)}
+                aria-label="Close menu"
               >
-                <span className="text-lg">📊</span>
-                <span className="font-medium">Events</span>
-                {logs.length > 0 && (
-                  <span className="bg-red-500 text-white text-xs rounded-full px-2 py-1 min-w-[20px] text-center">
-                    {logs.length}
-                  </span>
-                )}
-              </button>
-
-              {/* My Profile Icon */}
-              <button
-                onClick={() => setShowProfile(!showProfile)}
-                className="flex items-center space-x-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-              >
-                <span className="text-lg">👤</span>
-                <span className="font-medium">My Profile</span>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
+            <nav className="mt-4 flex-1 overflow-y-auto">
+              <div className="px-2 space-y-1">
+                {menuItems.map((item) => (
+                  <Link
+                    key={item.id}
+                    to={item.path}
+                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors text-sm ${
+                      location.pathname === item.path
+                        ? 'bg-blue-100 text-blue-700 border-r-2 border-blue-700'
+                        : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                    title={item.description}
+                    onClick={() => setShowSidebar(false)} // auto-close on click
+                  >
+                    <span className="text-lg">{item.icon}</span>
+                    <span className="font-medium">{item.name}</span>
+                  </Link>
+                ))}
+              </div>
+            </nav>
           </div>
-        </header>
+        </>
+      )}
 
-        {/* Main Content */}
-        <main className="flex-1 overflow-auto p-6">
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Top bar */}
+        <div
+          className="flex items-center justify-between px-4 md:px-8 py-3 bg-white shadow-sm sticky top-0 z-20"
+          style={{ minHeight: '56px', paddingLeft: '3.5rem' }} // 3.5rem = 56px, matches hamburger width+margin
+        >
+          {/* Heading (responsive font size and margin) */}
+          <h1 className="text-lg md:text-2xl font-semibold truncate ml-0 md:ml-0" style={{ maxWidth: '70vw' }}>
+            {getHeading(location.pathname)}
+          </h1>
+          {/* Profile and Events icons (responsive size) */}
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <button
+              className="p-1 md:p-2 rounded-full hover:bg-gray-100 focus:outline-none"
+              onClick={() => setShowEvents(true)}
+              aria-label="Show events"
+            >
+              <EventIcon className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
+            <button
+              className="p-1 md:p-2 rounded-full hover:bg-gray-100 focus:outline-none"
+              onClick={() => setShowProfile(true)}
+              aria-label="Show profile"
+            >
+              <ProfileIcon className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
+          </div>
+        </div>
+        {/* Main page content */}
+        <main className="flex-1 overflow-y-auto px-2 md:px-8 py-4 md:py-8" style={{ paddingLeft: '3.5rem' }}>
           {children}
         </main>
       </div>
@@ -230,7 +295,7 @@ const Layout: React.FC<LayoutProps> = ({ children, logs, addLog, clearLogs }) =>
                           <span className="text-lg">{getLogIcon(log.type)}</span>
                           <div className="flex-1">
                             <div className="flex items-center space-x-2">
-                              <span className={`font-medium ${getLogColor(log.type)}`}>
+                              <span className={getLogColor(log.type)}>
                                 {log.message}
                               </span>
                               <span className="text-xs text-gray-500">
@@ -253,80 +318,8 @@ const Layout: React.FC<LayoutProps> = ({ children, logs, addLog, clearLogs }) =>
           </div>
         </div>
       )}
-
-      {/* Profile Modal */}
-      {showProfile && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
-            <div className="flex justify-between items-center p-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">My Profile</h3>
-              <button
-                onClick={() => setShowProfile(false)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            
-            <div className="p-6">
-              <div className="text-center mb-6">
-                <div className="w-20 h-20 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-3xl">👤</span>
-                </div>
-                <h4 className="text-xl font-semibold text-gray-900">User Profile</h4>
-                <p className="text-gray-600">Pathways Agent User</p>
-              </div>
-              
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="Enter your name"
-                    defaultValue="John Doe"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                    placeholder="Enter your email"
-                    defaultValue="john.doe@example.com"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Preferred Insurance
-                  </label>
-                  <select className="w-full px-3 py-2 border border-gray-300 rounded-md">
-                    <option>Blue Cross</option>
-                    <option>Aetna</option>
-                    <option>Cigna</option>
-                    <option>UnitedHealth</option>
-                    <option>Medicare</option>
-                  </select>
-                </div>
-                
-                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
-                  Save Profile
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
-export default Layout; 
+export default Layout;
