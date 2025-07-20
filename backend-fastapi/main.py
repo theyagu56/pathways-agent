@@ -14,6 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from routes.match_providers import router as match_providers_router
 from routes.insurances import router as insurances_router
 from routes.specialties import router as specialties_router
+from routes.voice import router as voice_router
 
 logger.info("Starting Pathways AI Provider Matching API")
 
@@ -30,6 +31,7 @@ app.add_middleware(
 app.include_router(match_providers_router)
 app.include_router(insurances_router)
 app.include_router(specialties_router)
+app.include_router(voice_router)
 
 logger.info("FastAPI app configured with CORS and routers")
 
@@ -46,9 +48,11 @@ if __name__ == "__main__":
     print("🚀 Starting Pathways Agent Provider Matching API...")
     print("📋 Configuration:")
     print(f"   - OpenAI API Key: {'✅ Set' if os.getenv('OPENAI_API_KEY') else '❌ Missing'}")
+    print(f"   - Azure Speech Services: {'✅ Configured' if os.getenv('AZURE_SPEECH_KEY') else '❌ Not configured'}")
     print(f"   - Providers file: Will auto-detect from multiple possible locations")
     print("🌐 Server will be available at: http://localhost:8000")
     print("📚 API Documentation: http://localhost:8000/docs")
+    print("🎤 Voice Processing: Available at /api/voice/*")
     print("=" * 50)
     
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True) 

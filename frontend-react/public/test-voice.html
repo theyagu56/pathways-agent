@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Recording Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .recording {
+            background: #dc3545 !important;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        audio {
+            width: 100%;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎤 Voice Recording Test</h1>
+    
+    <div id="status"></div>
+    
+    <div>
+        <button id="testMic" class="button">🔍 Test Microphone Access</button>
+        <button id="startRecord" class="button">🎤 Start Recording</button>
+        <button id="stopRecord" class="button" disabled>⏹️ Stop Recording</button>
+    </div>
+    
+    <div id="audioContainer" style="display: none;">
+        <h3>Recorded Audio:</h3>
+        <audio id="audioPlayer" controls></audio>
+        <button id="processAudio" class="button">🚀 Process Audio</button>
+    </div>
+    
+    <div id="results"></div>
+
+    <script>
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+
+        function log(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.innerHTML = `<div class="status ${type}">${message}</div>`;
+            console.log(message);
+        }
+
+        function testMicrophone() {
+            log('Testing microphone access...', 'info');
+            
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                log('❌ getUserMedia is not supported in this browser', 'error');
+                return;
+            }
+
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    log('✅ Microphone access granted successfully!', 'success');
+                    stream.getTracks().forEach(track => track.stop());
+                })
+                .catch(error => {
+                    log(`❌ Microphone access failed: ${error.message}`, 'error');
+                    console.error('Error:', error);
+                });
+        }
+
+        function startRecording() {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                log('❌ Audio recording not supported in this browser', 'error');
+                return;
+            }
+
+            navigator.mediaDevices.getUserMedia({ 
+                audio: {
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                    sampleRate: 16000
+                } 
+            })
+            .then(stream => {
+                log('🎤 Starting recording...', 'info');
+                
+                mediaRecorder = new MediaRecorder(stream, {
+                    mimeType: 'audio/webm;codecs=opus'
+                });
+                
+                audioChunks = [];
+                
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        audioChunks.push(event.data);
+                        log(`📊 Audio chunk received: ${event.data.size} bytes`, 'info');
+                    }
+                };
+                
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    
+                    document.getElementById('audioPlayer').src = audioUrl;
+                    document.getElementById('audioContainer').style.display = 'block';
+                    
+                    log(`✅ Recording completed! Total size: ${audioBlob.size} bytes`, 'success');
+                    
+                    // Store blob for processing
+                    window.recordedAudioBlob = audioBlob;
+                };
+                
+                mediaRecorder.onerror = (event) => {
+                    log(`❌ Recording error: ${event.error}`, 'error');
+                };
+                
+                mediaRecorder.start(1000); // Record in 1-second chunks
+                isRecording = true;
+                
+                document.getElementById('startRecord').disabled = true;
+                document.getElementById('startRecord').classList.add('recording');
+                document.getElementById('stopRecord').disabled = false;
+                
+            })
+            .catch(error => {
+                log(`❌ Failed to start recording: ${error.message}`, 'error');
+                console.error('Error:', error);
+            });
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && isRecording) {
+                mediaRecorder.stop();
+                isRecording = false;
+                
+                document.getElementById('startRecord').disabled = false;
+                document.getElementById('startRecord').classList.remove('recording');
+                document.getElementById('stopRecord').disabled = true;
+                
+                log('⏹️ Recording stopped', 'info');
+            }
+        }
+
+        function processAudio() {
+            if (!window.recordedAudioBlob) {
+                log('❌ No audio recorded to process', 'error');
+                return;
+            }
+
+            log('🚀 Processing audio...', 'info');
+            
+            const formData = new FormData();
+            formData.append('audio_file', window.recordedAudioBlob, 'recording.webm');
+            formData.append('insurance', 'Cigna'); // Default for testing
+
+            fetch('http://localhost:8000/api/voice/upload-audio', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        throw new Error(err.detail || 'Failed to process audio');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                log('✅ Audio processed successfully!', 'success');
+                
+                const results = document.getElementById('results');
+                results.innerHTML = `
+                    <div class="status success">
+                        <h3>🎉 Processing Results:</h3>
+                        <p><strong>Transcription:</strong> ${data.voice_processing?.transcription || 'N/A'}</p>
+                        <p><strong>Symptoms:</strong> ${data.extracted_info?.symptoms || 'N/A'}</p>
+                        <p><strong>Zip Code:</strong> ${data.extracted_info?.zip_code || 'N/A'}</p>
+                        <p><strong>Specialties:</strong> ${data.specialty_recommendations?.join(', ') || 'N/A'}</p>
+                        <p><strong>Providers Found:</strong> ${data.total_providers_found || 0}</p>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                log(`❌ Processing failed: ${error.message}`, 'error');
+                console.error('Error:', error);
+            });
+        }
+
+        // Event listeners
+        document.getElementById('testMic').addEventListener('click', testMicrophone);
+        document.getElementById('startRecord').addEventListener('click', startRecording);
+        document.getElementById('stopRecord').addEventListener('click', stopRecording);
+        document.getElementById('processAudio').addEventListener('click', processAudio);
+
+        // Initial status
+        log('🎤 Voice Recording Test Page Loaded', 'info');
+        log('Click "Test Microphone Access" to check if your browser supports audio recording', 'info');
+    </script>
+</body>
+</html> 

@@ -38,6 +38,13 @@ const Layout: React.FC<LayoutProps> = ({ children, logs, addLog, clearLogs }) =>
       description: 'Patient information and intake form'
     },
     {
+      id: 'voice-intake',
+      name: 'Voice Intake',
+      icon: '🎤',
+      path: '/voice-intake',
+      description: 'Voice-enabled healthcare triage'
+    },
+    {
       id: 'referral-management',
       name: 'Referral Management',
       icon: '🏥',

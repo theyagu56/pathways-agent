@@ -1,6 +1,9 @@
 .env
 
 # Python
+venv/
+env/
+ENV/
 __pycache__/
 *.py[cod]
 *$py.class

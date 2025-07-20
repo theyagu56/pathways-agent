@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import ProviderMatching from './pages/provider-matching';
+import VoiceIntake from './pages/VoiceIntake';
 import Appointments from './pages/Appointments';
 import Documents from './pages/Documents';
 import Settings from './pages/Settings';
@@ -50,6 +51,7 @@ function App() {
             />
           } />
           <Route path="/referral-management" element={<ProviderMatching addLog={addLog} />} />
+          <Route path="/voice-intake" element={<VoiceIntake addLog={addLog} />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/documents" element={<Documents />} />
           <Route path="/settings" element={<Settings />} />
