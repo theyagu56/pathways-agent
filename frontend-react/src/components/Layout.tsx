@@ -31,27 +31,29 @@ const Layout: React.FC<LayoutProps> = ({ children, logs, addLog, clearLogs }) =>
       path: '/',
       description: 'Main dashboard'
     },
+    
     {
       id: 'patient-intake',
-      name: 'Patient Intake',
+      name: 'Policy & Members',
       icon: '👤',
       path: '/patient-intake',
       description: 'Patient information and intake form'
     },
+    
     {
       id: 'voice-intake',
-      name: 'Voice Intake',
+      name: 'Triage & Referral',
       icon: '🎤',
       path: '/voice-intake',
       description: 'Voice-enabled healthcare triage'
     },
-    {
+    /*{
       id: 'referral-management',
-      name: 'Referral Management',
+      name: 'Triage & Referral',
       icon: '🏥',
       path: '/referral-management',
       description: 'Provider matching and referrals'
-    },
+    },*/
     {
       id: 'appointments',
       name: 'Appointments',
