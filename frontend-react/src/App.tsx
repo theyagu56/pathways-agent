@@ -8,6 +8,7 @@ import Appointments from './pages/Appointments';
 import Documents from './pages/Documents';
 import Settings from './pages/Settings';
 import PatientIntakeForm from './components/PatientIntakeForm';
+import ErrorBoundary from './components/ErrorBoundary';
 
 interface LogEntry {
   id: string;
@@ -36,28 +37,30 @@ function App() {
   };
 
   return (
-    <Router>
-      <Layout logs={logs} addLog={addLog} clearLogs={clearLogs}>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/patient-intake" element={
-            <PatientIntakeForm
-              familyMembers={[]}
-              insuranceProviders={[]}
-              mode="dashboard"
-              onSubmit={(data) => {
-                console.log('Form submitted:', data);
-              }}
-            />
-          } />
-          <Route path="/referral-management" element={<ProviderMatching addLog={addLog} />} />
-          <Route path="/voice-intake" element={<VoiceIntake addLog={addLog} />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/documents" element={<Documents />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <Layout logs={logs} addLog={addLog} clearLogs={clearLogs}>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/patient-intake" element={
+              <PatientIntakeForm
+                familyMembers={[]}
+                insuranceProviders={[]}
+                mode="dashboard"
+                onSubmit={(data) => {
+                  console.log('Form submitted:', data);
+                }}
+              />
+            } />
+            <Route path="/referral-management" element={<ProviderMatching addLog={addLog} />} />
+            <Route path="/voice-intake" element={<VoiceIntake addLog={addLog} />} />
+            <Route path="/appointments" element={<Appointments />} />
+            <Route path="/documents" element={<Documents />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </ErrorBoundary>
   );
 }
 
