@@ -1,0 +1,10 @@
+__pycache__
+*.pyc
+*.pyo
+.dockerignore
+Dockerfile
+.git
+.gitignore
+.env
+venv
+shared-data 

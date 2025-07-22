@@ -31,6 +31,8 @@ azure-storage-blob>=12.19.0
 # Data Processing and Utilities
 pydantic>=2.5.0
 typing-extensions>=4.8.0
+pandas>=2.0.0
+sqlalchemy>=2.0.0
 
 # Development and Testing (Optional)
 pytest>=7.4.0
