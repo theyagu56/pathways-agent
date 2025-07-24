@@ -4,8 +4,8 @@ This project enhances the existing Pathways Agent monorepo with a Provider Match
 
 ## 🏗️ Architecture
 
-- **FastAPI Backend** (`backend-fastapi/`): AI-powered provider matching service
-- **React Frontend** (`frontend-react/`): Modern web interface with Tailwind CSS
+- **FastAPI Backend** (`backend/`): AI-powered provider matching service
+- **React Frontend** (`frontend/`): Modern web interface with Tailwind CSS
 - **Shared Data** (`shared-data/`): Provider database and configuration
 
 ## 🚀 Quick Start
@@ -19,7 +19,7 @@ This project enhances the existing Pathways Agent monorepo with a Provider Match
 ### 1. Backend Setup
 
 ```bash
-cd pathways-ai/backend-fastapi
+cd pathways-ai/backend
 
 # Install dependencies
 pip install -r requirements.txt
@@ -36,7 +36,7 @@ The backend will be available at `http://localhost:8000`
 ### 2. Frontend Setup
 
 ```bash
-cd pathways-ai/frontend-react
+cd pathways-ai/frontend
 
 # Install dependencies
 npm install
@@ -51,7 +51,7 @@ The frontend will be available at `http://localhost:3000`
 
 ### Environment Variables
 
-Create a `.env` file in `backend-fastapi/`:
+Create a `.env` file in `backend/`:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
@@ -118,10 +118,10 @@ The backend is configured to accept requests from `http://localhost:3000` for de
 
 ```
 pathways-ai/
-├── backend-fastapi/          # FastAPI provider matching service
+├── backend/          # FastAPI provider matching service
 │   ├── main.py              # Main application
 │   └── requirements.txt     # Python dependencies
-├── frontend-react/          # React frontend
+├── frontend/          # React frontend
 │   ├── src/
 │   │   ├── pages/
 │   │   │   └── provider-matching.tsx
@@ -137,14 +137,14 @@ pathways-ai/
 ### Backend Testing
 
 ```bash
-cd pathways-ai/backend-fastapi
+cd pathways-ai/backend
 python -m pytest
 ```
 
 ### Frontend Testing
 
 ```bash
-cd pathways-ai/frontend-react
+cd pathways-ai/frontend
 npm test
 ```
 
@@ -162,7 +162,7 @@ The FastAPI app can be deployed using:
 
 The React app can be built and deployed:
 ```bash
-cd pathways-ai/frontend-react
+cd pathways-ai/frontend
 npm run build
 ```
 
@@ -228,3 +228,45 @@ Error: getaddrinfo ENOTFOUND arm64-apple-darwin20.0.0
    npm start
    ```
 If the problem persists, check your shell config files (e.g., `~/.zshrc`, `~/.bash_profile`) for any lines setting `HOST=...` and remove or comment them out. 
+
+---
+
+## 1. Start the Backend (FastAPI)
+
+```sh
+cd backend
+# (Optional but recommended) Activate your virtual environment:
+source venv/bin/activate
+# Start the FastAPI server:
+python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+---
+
+## 2. Start the Frontend (React)
+
+In a new terminal window/tab:
+
+```sh
+cd frontend
+npm install   # Only needed the first time or if dependencies change
+npm start
+```
+
+---
+
+## 3. (Alternative) Run Both with Docker Compose
+
+If you want to run both backend and frontend using Docker Compose:
+
+```sh
+docker-compose up --build
+```
+
+---
+
+**Access the app:**
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend: [http://localhost:8000](http://localhost:8000)
+
+Let me know if you need commands for production, testing, or anything else! 

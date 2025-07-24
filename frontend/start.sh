@@ -6,7 +6,7 @@ echo "🚀 Starting Pathways Agent React Frontend..."
 
 # Check if we're in the right directory
 if [ ! -f "package.json" ]; then
-    echo "❌ package.json not found. Make sure you're in the frontend-react directory."
+    echo "❌ package.json not found. Make sure you're in the frontend directory."
     exit 1
 fi
 

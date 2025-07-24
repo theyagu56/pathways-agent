@@ -18,7 +18,7 @@ function checkEnvironment() {
     const packageJsonPath = path.join(currentDir, 'package.json');
     if (!fs.existsSync(packageJsonPath)) {
         console.log('❌ package.json not found in current directory');
-        console.log('💡 Make sure you\'re in the frontend-react directory');
+        console.log('💡 Make sure you\'re in the frontend directory');
         return false;
     }
     

@@ -86,7 +86,7 @@ cd pathways-ai
 
 #### 2.1 Create Virtual Environment
 ```bash
-cd backend-fastapi
+cd backend
 python -m venv venv
 
 # Activate virtual environment
@@ -106,7 +106,7 @@ pip install -r requirements.txt
 ```
 
 #### 2.3 Environment Configuration
-Create a `.env` file in `backend-fastapi/`:
+Create a `.env` file in `backend/`:
 ```env
 # Required: OpenAI API Key
 OPENAI_API_KEY=your_openai_api_key_here
@@ -143,7 +143,7 @@ python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
 #### 3.1 Install Node.js Dependencies
 ```bash
-cd frontend-react
+cd frontend
 npm install
 ```
 
@@ -189,7 +189,7 @@ npm start
 
 ### Backend Testing
 ```bash
-cd backend-fastapi
+cd backend
 
 # Run the test suite
 python test_voice_integration.py
@@ -201,7 +201,7 @@ curl http://localhost:8000/api/specialties
 
 ### Frontend Testing
 ```bash
-cd frontend-react
+cd frontend
 
 # Run tests
 npm test
@@ -320,9 +320,9 @@ export PYTHONDONTWRITEBYTECODE=1
 ## 📊 System Monitoring
 
 ### Log Files
-- **Backend logs**: `backend-fastapi/logs/`
-- **Error logs**: `backend-fastapi/logs/pathways-ai_errors_*.log`
-- **Application logs**: `backend-fastapi/logs/pathways-ai_*.log`
+- **Backend logs**: `backend/logs/`
+- **Error logs**: `backend/logs/pathways-ai_errors_*.log`
+- **Application logs**: `backend/logs/pathways-ai_*.log`
 
 ### Health Checks
 ```bash

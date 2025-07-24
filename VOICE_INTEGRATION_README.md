@@ -34,13 +34,13 @@ This enhancement adds voice-to-text capabilities to the healthcare triage applic
 ### 1. Install Dependencies
 
 ```bash
-cd backend-fastapi
+cd backend
 pip install -r requirements.txt
 ```
 
 ### 2. Environment Configuration
 
-Create a `.env` file in the `backend-fastapi` directory:
+Create a `.env` file in the `backend` directory:
 
 ```env
 # OpenAI Configuration
@@ -70,7 +70,7 @@ LOG_LEVEL=INFO
 ### 4. Start the Backend
 
 ```bash
-cd backend-fastapi
+cd backend
 source venv/bin/activate
 python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
@@ -78,7 +78,7 @@ python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ### 5. Start the Frontend
 
 ```bash
-cd frontend-react
+cd frontend
 npm start
 ```
 

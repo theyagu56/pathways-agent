@@ -19,7 +19,7 @@ def check_environment():
     # Check if we're in the right place
     if not (current_dir / "main.py").exists():
         print("❌ main.py not found in current directory")
-        print("💡 Make sure you're in the backend-fastapi directory")
+        print("💡 Make sure you're in the backend directory")
         return False
     
     # Check for providers.json in various locations

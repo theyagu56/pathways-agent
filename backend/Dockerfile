@@ -14,12 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy app code
 COPY . .
 
-# Copy shared data (will be mounted in compose)
-COPY ../shared-data /app/shared-data
-
-# Copy .env.production as .env
-COPY .env.production .env
-
 USER appuser
 EXPOSE 8000
 ENV ENV=production
