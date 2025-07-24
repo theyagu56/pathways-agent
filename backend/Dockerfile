@@ -1,17 +1,26 @@
-# Use official Python image
-FROM python:3.10-slim
+FROM python:3.11-slim
 
-# Set working directory
+# Create non-root user
+RUN useradd -m appuser
 WORKDIR /app
 
-# Install dependencies
-COPY requirements.txt .
+# Install system dependencies
+RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy app code
 COPY . .
 
-# Default command to run the app
-EXPOSE 8090
+# Copy shared data (will be mounted in compose)
+COPY ../shared-data /app/shared-data
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8090", "--reload"]
+# Copy .env.production as .env
+COPY .env.production .env
+
+USER appuser
+EXPOSE 8000
+ENV ENV=production
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"] 

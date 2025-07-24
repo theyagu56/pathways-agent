@@ -1,22 +1,10 @@
-# Python artifacts
-__pycache__/
-*.py[cod]
+__pycache__
+*.pyc
 *.pyo
-
-# Environment files
+.dockerignore
+Dockerfile
+.git
+.gitignore
 .env
-*.env
-
-# IDE directories
-.vscode/
-.idea/
-
-# Logs
-*.log
-
-# Flutter build outputs (if any included)
-frontend/build/
-frontend/.dart_tool/
-
-# OS artifacts
-.DS_Store
+venv
+shared-data 
